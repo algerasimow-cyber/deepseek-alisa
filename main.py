@@ -4,8 +4,8 @@ import requests
 
 app = FastAPI()
 
-DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
-DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
+OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 @app.post("/")
 async def main(request: Request):
@@ -13,10 +13,10 @@ async def main(request: Request):
     user_text = body["request"]["original_utterance"]
 
     response = requests.post(
-        DEEPSEEK_API_URL,
-        headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"},
+        OPENROUTER_API_URL,
+        headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
         json={
-            "model": "deepseek-chat",
+             "model": "deepseek/deepseek-r1:free",
             "messages": [{"role": "user", "content": user_text}],
         }
     )
